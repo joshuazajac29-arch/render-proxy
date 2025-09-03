@@ -145,6 +145,27 @@ app.post('/proxy', async (req, res) => {
       },
       body: JSON.stringify(body),
       timeout: 15000
+        // ===== ROOT ENDPOINT =====
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Render Proxy Server is working! 🎉',
+    endpoints: {
+      health: '/health',
+      proxy: '/proxy?url=YOUR_API_URL',
+      example: '/proxy?url=https://jsonplaceholder.typicode.com/posts/1'
+    },
+    status: 'active'
+  });
+});
+      // ===== POST PROXY =====
+app.post('/proxy', async (req, res) => {
+  // ... existing code ...
+});
+
+// ===== START SERVER =====
+app.listen(PORT, () => {
+  console.log('🚀 Proxy server started on port', PORT);
+});
     });
 
     const data = await response.json();
